@@ -1,28 +1,53 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:background="@mipmap/hill_background"
+    android:gravity="center_vertical">
 
+    <!--<View-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="1dp"-->
+        <!--android:layout_centerHorizontal="true"-->
+        <!--android:layout_centerInParent="true"-->
+        <!--android:layout_marginRight="16dp"-->
+        <!--android:layout_marginLeft="16dp"-->
+        <!--android:id="@+id/centerLine">-->
+    <!--</View>-->
 
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
 
+        <ImageView
+            android:scaleY="1"
+            android:scaleX="1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/man"
+            android:id="@+id/runningManLogo"
+            />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_centerHorizontal="true"
-        android:layout_centerInParent="true"
-        android:layout_marginRight="16dp"
-        android:layout_marginLeft="16dp"
-        android:id="@+id/centerLine">
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@mipmap/maps_marker"
+            android:scaleX="0.4"
+            android:scaleY="0.4"/>
 
-    </View>
+    </LinearLayout>
 
-    <ImageView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:src="@mipmap/hill_background"
-        android:scaleX="2"
-        />
+    <!--<TextView-->
+        <!--android:layout_width="wrap_content"-->
+        <!--android:layout_height="wrap_content"-->
+        <!--android:text="Odd Job"-->
+        <!--android:textStyle="bold"-->
+        <!--android:textColor="#000000"-->
+        <!--android:textSize="64sp"-->
+        <!--android:layout_gravity="center"-->
+        <!--android:fontFamily="sans-serif-light"/>-->
 
     <Button
         android:layout_width="match_parent"
@@ -31,8 +56,13 @@
         android:text="Request Job"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginBottom="4dp"
-        android:layout_above="@id/centerLine"/>
+        android:layout_marginTop="16dp"
+        android:shadowColor="@color/white"
+        android:shadowRadius="70"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:padding="24dp"/>
 
 
     <Button
@@ -42,7 +72,13 @@
         android:text="Find Job"
         android:layout_marginRight="16dp"
         android:layout_marginLeft="16dp"
-        android:layout_marginTop="4dp"
-        android:layout_below="@id/centerLine"/>
+        android:layout_marginTop="30dp"
+        android:shadowColor="@color/white"
+        android:shadowRadius="70"
+        android:background="@drawable/rounded_button"
+        android:textColor="@color/white"
+        android:textStyle="bold"
+        android:padding="24dp"
+        android:layout_marginBottom="48dp"/>
 
-</RelativeLayout>
+</LinearLayout>

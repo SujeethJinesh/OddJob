@@ -6,31 +6,33 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/blue_waves"
         android:scaleType="centerCrop"
-        />
+        android:src="@mipmap/blue_waves" />
 
     <TextView
         android:id="@+id/instructions"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:layout_centerHorizontal="true"
+        android:layout_marginBottom="24dp"
+        android:layout_marginLeft="16dp"
         android:layout_marginTop="16dp"
         android:text="Select tags"
+        android:textAllCaps="true"
         android:textColor="#000000"
         android:textSize="24sp"
-        android:textStyle="bold"
-        android:textAllCaps="true"
-        />
+        android:textStyle="bold" />
 
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/instructions"
-        android:orientation="vertical"
-        android:id="@+id/linearLayout">
+        android:layout_centerHorizontal="true"
+        android:layout_centerInParent="true"
+        android:layout_centerVertical="true"
+        android:orientation="vertical">
 
         <CheckBox
             android:id="@+id/requestTutoringCheckBox"
@@ -38,6 +40,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:buttonTint="#00000000"
             android:fontFamily="sans-serif-light"
             android:paddingLeft="24dp"
             android:text="Tutoring"
@@ -50,6 +53,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:buttonTint="#00000000"
             android:fontFamily="sans-serif-light"
             android:paddingLeft="24dp"
             android:text="cooking"
@@ -62,6 +66,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:buttonTint="#00000000"
             android:fontFamily="sans-serif-light"
             android:paddingLeft="24dp"
             android:text="babysitting"
@@ -74,6 +79,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:buttonTint="#00000000"
             android:fontFamily="sans-serif-light"
             android:paddingLeft="24dp"
             android:text="heavy lifting"
@@ -86,6 +92,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:buttonTint="#00000000"
             android:fontFamily="sans-serif-light"
             android:paddingLeft="24dp"
             android:text="driving"
@@ -98,6 +105,7 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
+            android:buttonTint="#00000000"
             android:fontFamily="sans-serif-light"
             android:paddingLeft="24dp"
             android:text="miscellaneous"
@@ -113,7 +121,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
-        android:text="Next" />
+        android:background="@drawable/rounded_button"
+        android:text="Next"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

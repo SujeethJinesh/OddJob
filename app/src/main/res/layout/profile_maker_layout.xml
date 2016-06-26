@@ -4,56 +4,59 @@
     android:layout_height="match_parent">
 
     <ImageView
+        android:id="@+id/profileBackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:src="@mipmap/blue_waves"
         android:scaleType="centerCrop"
-        />
+        android:src="@mipmap/blue_waves" />
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="16dp"
+        android:text="Create A Profile:"
+        android:textAllCaps="true"
+        android:textSize="28sp"
+        android:textStyle="bold" />
+
+    <EditText
+        android:id="@+id/nameEditText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/title"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="8dp"
+        android:hint="Enter your name" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/nameEditText"
+        android:layout_marginLeft="16dp"
+        android:text="Select Tags:"
+        android:textAllCaps="true"
+        android:textSize="24sp"
+        android:textStyle="bold" />
 
     <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        android:orientation="vertical">
-
-        <TextView
-            android:id="@+id/title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:text="Create A Profile:"
-            android:textSize="28sp"
-            android:textStyle="bold"
-            />
-
-        <EditText
-            android:id="@+id/nameEditText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:layout_marginBottom="16dp"
-            android:layout_marginTop="16dp"
-            android:hint="Enter your name" />
-
-        <TextView
-            android:id="@+id/textView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Select Tags:"
-            android:layout_marginLeft="16dp"
-            android:textSize="24sp"
-            android:textStyle="bold"
-            />
-
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:id="@+id/linearLayout"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true">
 
         <CheckBox
             android:id="@+id/tutoringCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:fontFamily="sans-serif-light"
-            android:paddingLeft="24dp"
             android:text="tutoring"
             android:textAllCaps="true"
             android:textSize="20sp" />
@@ -62,10 +65,8 @@
             android:id="@+id/cookingCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-light"
-            android:paddingLeft="24dp"
             android:text="cooking"
             android:textAllCaps="true"
             android:textSize="20sp" />
@@ -74,10 +75,8 @@
             android:id="@+id/babysittingCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-light"
-            android:paddingLeft="24dp"
             android:text="babysitting"
             android:textAllCaps="true"
             android:textSize="20sp" />
@@ -86,10 +85,8 @@
             android:id="@+id/drivingCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-light"
-            android:paddingLeft="24dp"
             android:text="heavy lifting"
             android:textAllCaps="true"
             android:textSize="20sp" />
@@ -98,17 +95,15 @@
             android:id="@+id/liftingCheckBox"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="16dp"
             android:layout_marginTop="16dp"
             android:fontFamily="sans-serif-light"
-            android:paddingLeft="24dp"
             android:text="driving"
             android:textAllCaps="true"
             android:textSize="20sp" />
 
 
-
     </LinearLayout>
+
     <Button
         android:id="@+id/submitButton"
         android:layout_width="wrap_content"
@@ -116,5 +111,10 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_margin="16dp"
-        android:text="Next"  />
+        android:background="@drawable/rounded_button"
+        android:shadowColor="@color/white"
+        android:shadowRadius="70"
+        android:text="Next"
+        android:textColor="@color/white"
+        android:textStyle="bold" />
 </RelativeLayout>
