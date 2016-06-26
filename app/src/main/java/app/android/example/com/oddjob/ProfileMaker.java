@@ -23,29 +23,29 @@ public class ProfileMaker extends AppCompatActivity {
 
         final String name = ((EditText) findViewById(R.id.nameEditText)).toString();
 
-        if (((CheckBox) findViewById(R.id.tutoringCheckBox)).isChecked()) {
-            skillsArrayList.add("tutoring");
-        }
-        if (((CheckBox) findViewById(R.id.babysittingCheckBox)).isChecked()) {
-            skillsArrayList.add("babysitting");
-        }
-        if (((CheckBox) findViewById(R.id.cookingCheckBox)).isChecked()) {
-            skillsArrayList.add("cooking");
-        }
-        if (((CheckBox) findViewById(R.id.drivingCheckBox)).isChecked()) {
-            skillsArrayList.add("driving");
-        }
-        if (((CheckBox) findViewById(R.id.liftingCheckBox)).isChecked()) {
-            skillsArrayList.add("lifting");
-        }
-
         Button submitButton = (Button) findViewById(R.id.submitButton);
-        final Intent intent = new Intent(this, MainPage.class);
+        final Intent intent = new Intent(this, FindingJobMapsActivity.class);
 
         if (submitButton != null) {
             submitButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+
+                    if (((CheckBox) findViewById(R.id.tutoringCheckBox)).isChecked()) {
+                        skillsArrayList.add("tutoring");
+                    }
+                    if (((CheckBox) findViewById(R.id.babysittingCheckBox)).isChecked()) {
+                        skillsArrayList.add("babysitting");
+                    }
+                    if (((CheckBox) findViewById(R.id.cookingCheckBox)).isChecked()) {
+                        skillsArrayList.add("cooking");
+                    }
+                    if (((CheckBox) findViewById(R.id.drivingCheckBox)).isChecked()) {
+                        skillsArrayList.add("driving");
+                    }
+                    if (((CheckBox) findViewById(R.id.liftingCheckBox)).isChecked()) {
+                        skillsArrayList.add("lifting");
+                    }
 
                     String[] skills = new String[skillsArrayList.size()];
                     skillsArrayList.toArray(skills);

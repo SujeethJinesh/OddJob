@@ -30,9 +30,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class FindingJobMapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-    private LatLng newPosition;
+    private Bundle profileBundle;
+    private Profile profile;
+    private String personName;
+    private String[] personSkills;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -47,10 +48,25 @@ public class FindingJobMapsActivity extends FragmentActivity implements OnMapRea
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
 
+        profileBundle = getIntent().getExtras();
+        profile = (Profile) profileBundle.getSerializable("profile");
+
+        personName = profile.getName();
+        personSkills = profile.getSkills();
+
         mapFragment.getMapAsync(this);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private boolean contains(String[] arr, String compareTo){
+        for (String word : arr) {
+            if (word.equals(compareTo)) {
+                return true;
+            }
+        }
+        return false;
     }
 
     /**
@@ -66,7 +82,9 @@ public class FindingJobMapsActivity extends FragmentActivity implements OnMapRea
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
-        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+        if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
+                != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this,
+                Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
             // TODO: Consider calling
             //    ActivityCompat#requestPermissions
             // here to request the missing permissions, and then overriding
@@ -139,29 +157,44 @@ public class FindingJobMapsActivity extends FragmentActivity implements OnMapRea
         currentPositionMarker.setVisible(true);
         currentPositionMarker.setVisible(false);
 
-        LatLng babysitterPosition = new LatLng(37.4149, -122.0486);
-        MarkerOptions babysitterMarkerOptions = new MarkerOptions();
-        babysitterMarkerOptions.position(babysitterPosition).title("I need a babysitter!");
-        Marker babysitterMarker = mMap.addMarker(babysitterMarkerOptions);
-        babysitterMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        if (contains(personSkills, "babysitting")) {
+            LatLng babysitterPosition = new LatLng(37.4149, -122.0486);
+            MarkerOptions babysitterMarkerOptions = new MarkerOptions();
+            babysitterMarkerOptions.position(babysitterPosition).title("I need a babysitter!");
+            Marker babysitterMarker = mMap.addMarker(babysitterMarkerOptions);
+            babysitterMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        }
 
-        LatLng mechanicPosition = new LatLng(37.4220, -122.0841);
-        MarkerOptions mechanicMarkerOptions = new MarkerOptions();
-        mechanicMarkerOptions.position(mechanicPosition).title("I need a mechanic!");
-        Marker mechanicMarker = mMap.addMarker(mechanicMarkerOptions);
-        mechanicMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        if (contains(personSkills, "driving")) {
+            LatLng mechanicPosition = new LatLng(37.4220, -122.0841);
+            MarkerOptions mechanicMarkerOptions = new MarkerOptions();
+            mechanicMarkerOptions.position(mechanicPosition).title("I need a ride!");
+            Marker mechanicMarker = mMap.addMarker(mechanicMarkerOptions);
+            mechanicMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
-        LatLng tutorPosition = new LatLng(37.4,-122.0);
-        MarkerOptions tutorMarkerOptions = new MarkerOptions();
-        tutorMarkerOptions.position(tutorPosition).title("I need a tutor!");
-        Marker tutorMarker = mMap.addMarker(tutorMarkerOptions);
-        tutorMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            LatLng driverPosition = new LatLng(37.3688, -122.0363);
+            MarkerOptions driverMarkerOptions = new MarkerOptions();
+            driverMarkerOptions.position(driverPosition).title("I need a driver!");
+            Marker driverMarker = mMap.addMarker(driverMarkerOptions);
+            driverMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
 
-        LatLng driverPosition = new LatLng(37.3688, -122.0363);
-        MarkerOptions driverMarkerOptions = new MarkerOptions();
-        driverMarkerOptions.position(driverPosition).title("I need a driver!");
-        Marker driverMarker = mMap.addMarker(driverMarkerOptions);
-        driverMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+        }
+
+        if (contains(personSkills, "tutoring")) {
+            LatLng tutorPosition = new LatLng(37.4,-122.0);
+            MarkerOptions tutorMarkerOptions = new MarkerOptions();
+            tutorMarkerOptions.position(tutorPosition).title("I need a tutor!");
+            Marker tutorMarker = mMap.addMarker(tutorMarkerOptions);
+            tutorMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        }
+
+        if (contains(personSkills, "lifting")) {
+            LatLng tutorPosition = new LatLng(37.401,-122.02);
+            MarkerOptions tutorMarkerOptions = new MarkerOptions();
+            tutorMarkerOptions.position(tutorPosition).title("I need help moving!");
+            Marker tutorMarker = mMap.addMarker(tutorMarkerOptions);
+            tutorMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
+        }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPosition));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(12), 2000, null);

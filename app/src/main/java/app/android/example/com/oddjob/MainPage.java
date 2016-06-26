@@ -15,8 +15,6 @@ public class MainPage extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_page);
 
-        Profile profile = (Profile) getIntent().getSerializableExtra("profile");
-
         Button requestJobButton = (Button) findViewById(R.id.requestJobButton);
         Button findJobButton = (Button) findViewById(R.id.findJobButton);
 
@@ -42,7 +40,7 @@ public class MainPage extends AppCompatActivity {
     }
 
     private void goToFindingJobMapsActivity() {
-        Intent intent = new Intent(this, FindingJobMapsActivity.class);
+        Intent intent = new Intent(this, ProfileMaker.class);
 
         startActivity(intent);
     }

@@ -20,22 +20,6 @@ public class RequestJob extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.request_job);
 
-        if (((CheckBox) findViewById(R.id.requestTutoringCheckBox)).isChecked()) {
-            skillsArrayList.add("tutoring");
-        }
-        if (((CheckBox) findViewById(R.id.requestBabysittingCheckBox)).isChecked()) {
-            skillsArrayList.add("babysitting");
-        }
-        if (((CheckBox) findViewById(R.id.requestCookingCheckBox)).isChecked()) {
-            skillsArrayList.add("cooking");
-        }
-        if (((CheckBox) findViewById(R.id.requestDrivingCheckBox)).isChecked()) {
-            skillsArrayList.add("driving");
-        }
-        if (((CheckBox) findViewById(R.id.requestLiftingCheckBox)).isChecked()) {
-            skillsArrayList.add("lifting");
-        }
-
         Button submitButton = (Button) findViewById(R.id.requestNextButton);
         final Intent intent = new Intent(this, MapsActivity.class);
 
@@ -44,15 +28,26 @@ public class RequestJob extends AppCompatActivity {
                 @Override
                 public void onClick(View v) {
 
-                    //String[] skills = new String[skillsArrayList.size()];
-                    //skillsArrayList.toArray(skills);
+                    if (((CheckBox) findViewById(R.id.requestTutoringCheckBox)).isChecked()) {
+                        skillsArrayList.add("tutoring");
+                    }
+                    if (((CheckBox) findViewById(R.id.requestBabysittingCheckBox)).isChecked()) {
+                        skillsArrayList.add("babysitting");
+                    }
+                    if (((CheckBox) findViewById(R.id.requestCookingCheckBox)).isChecked()) {
+                        skillsArrayList.add("cooking");
+                    }
+                    if (((CheckBox) findViewById(R.id.requestDrivingCheckBox)).isChecked()) {
+                        skillsArrayList.add("driving");
+                    }
+                    if (((CheckBox) findViewById(R.id.requestLiftingCheckBox)).isChecked()) {
+                        skillsArrayList.add("lifting");
+                    }
 
-                    //Profile profile = new Profile(name, skills);
+                    String[] skills = new String[skillsArrayList.size()];
+                    skillsArrayList.toArray(skills);
 
-                    //Bundle bundle = new Bundle();
-                    //bundle.putSerializable("profile", profile);
-
-                    //intent.putExtras(bundle);
+                    intent.putExtra("skills", skills);
 
                     startActivity(intent);
                 }

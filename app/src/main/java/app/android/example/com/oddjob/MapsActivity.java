@@ -30,9 +30,9 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
-    private LocationManager locationManager;
-    private LocationListener locationListener;
-    private LatLng newPosition;
+    private Intent skillsIntent;
+    private String[] skills;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -46,6 +46,9 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
+
+        skillsIntent = getIntent();
+        skills = skillsIntent.getStringArrayExtra("skills");
 
         mapFragment.getMapAsync(this);
         // ATTENTION: This was auto-generated to implement the App Indexing API.
@@ -132,6 +135,15 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 .position(currentPosition));
     }
 
+    private boolean contains(String[] arr, String compareTo){
+        for (String word : arr) {
+            if (word.equals(compareTo)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private void drawDefaultMarker() {
         mMap.clear();
         LatLng currentPosition = new LatLng(37.4102940,-122.0364610);
@@ -139,29 +151,35 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         currentPositionMarker.setVisible(true);
         currentPositionMarker.setVisible(false);
 
-        LatLng babysitterPosition = new LatLng(37.4149, -122.0486);
-        MarkerOptions babysitterMarkerOptions = new MarkerOptions();
-        babysitterMarkerOptions.position(babysitterPosition).title("I'm a babysitter!");
-        Marker babysitterMarker = mMap.addMarker(babysitterMarkerOptions);
-        babysitterMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        if (contains(skills, "babysitting")) {
+            LatLng babysitterPosition = new LatLng(37.4149, -122.0486);
+            MarkerOptions babysitterMarkerOptions = new MarkerOptions();
+            babysitterMarkerOptions.position(babysitterPosition).title("I'm a babysitter!");
+            Marker babysitterMarker = mMap.addMarker(babysitterMarkerOptions);
+            babysitterMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        }
 
-        LatLng mechanicPosition = new LatLng(37.4220, -122.0841);
-        MarkerOptions mechanicMarkerOptions = new MarkerOptions();
-        mechanicMarkerOptions.position(mechanicPosition).title("I'm a mechanic!");
-        Marker mechanicMarker = mMap.addMarker(mechanicMarkerOptions);
-        mechanicMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        if (contains(skills, "driving")) {
+            LatLng mechanicPosition = new LatLng(37.4220, -122.0841);
+            MarkerOptions mechanicMarkerOptions = new MarkerOptions();
+            mechanicMarkerOptions.position(mechanicPosition).title("I'm a driver!");
+            Marker mechanicMarker = mMap.addMarker(mechanicMarkerOptions);
+            mechanicMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
-        LatLng tutorPosition = new LatLng(37.4,-122.0);
-        MarkerOptions tutorMarkerOptions = new MarkerOptions();
-        tutorMarkerOptions.position(tutorPosition).title("I'm a tutor!");
-        Marker tutorMarker = mMap.addMarker(tutorMarkerOptions);
-        tutorMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+            LatLng driverPosition = new LatLng(37.3688, -122.0363);
+            MarkerOptions driverMarkerOptions = new MarkerOptions();
+            driverMarkerOptions.position(driverPosition).title("I'm a driver!");
+            Marker driverMarker = mMap.addMarker(driverMarkerOptions);
+            driverMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+        }
 
-        LatLng driverPosition = new LatLng(37.3688, -122.0363);
-        MarkerOptions driverMarkerOptions = new MarkerOptions();
-        driverMarkerOptions.position(driverPosition).title("I'm a driver!");
-        Marker driverMarker = mMap.addMarker(driverMarkerOptions);
-        driverMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+        if (contains(skills, "tutoring")) {
+            LatLng tutorPosition = new LatLng(37.4,-122.0);
+            MarkerOptions tutorMarkerOptions = new MarkerOptions();
+            tutorMarkerOptions.position(tutorPosition).title("I'm a tutor!");
+            Marker tutorMarker = mMap.addMarker(tutorMarkerOptions);
+            tutorMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        }
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPosition));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(12), 2000, null);
