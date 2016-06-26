@@ -30,7 +30,7 @@ public class MainPage extends AppCompatActivity {
         findJobButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                goToInstantMessagingActivity();
+                goToFindingJobMapsActivity();
             }
         });
     }
@@ -41,8 +41,8 @@ public class MainPage extends AppCompatActivity {
         startActivity(intent);
     }
 
-    private void goToInstantMessagingActivity() {
-        Intent intent = new Intent(this, goToInstantMessagingActivity.class);
+    private void goToFindingJobMapsActivity() {
+        Intent intent = new Intent(this, FindingJobMapsActivity.class);
 
         startActivity(intent);
     }
