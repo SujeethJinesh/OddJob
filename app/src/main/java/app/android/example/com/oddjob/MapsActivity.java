@@ -2,6 +2,7 @@ package app.android.example.com.oddjob;
 
 import android.Manifest;
 import android.app.Dialog;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Criteria;
 import android.location.Location;
@@ -23,6 +24,7 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
@@ -133,27 +135,46 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private void drawDefaultMarker() {
         mMap.clear();
         LatLng currentPosition = new LatLng(37.4102940,-122.0364610);
-        mMap.addMarker(new MarkerOptions()
-                .position(currentPosition).title("You're here!")).setVisible(true);
+        Marker currentPositionMarker = mMap.addMarker(new MarkerOptions().position(currentPosition));
+        currentPositionMarker.setVisible(true);
+        currentPositionMarker.setVisible(false);
 
         LatLng babysitterPosition = new LatLng(37.4149, -122.0486);
-        mMap.addMarker(new MarkerOptions().position(babysitterPosition).title("I'm a babysitter!")).setIcon(
-                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
+        MarkerOptions babysitterMarkerOptions = new MarkerOptions();
+        babysitterMarkerOptions.position(babysitterPosition).title("I'm a babysitter!");
+        Marker babysitterMarker = mMap.addMarker(babysitterMarkerOptions);
+        babysitterMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
 
         LatLng mechanicPosition = new LatLng(37.4220, -122.0841);
-        mMap.addMarker(new MarkerOptions().position(mechanicPosition).title("I'm a mechanic!")).setIcon(
-                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
+        MarkerOptions mechanicMarkerOptions = new MarkerOptions();
+        mechanicMarkerOptions.position(mechanicPosition).title("I'm a mechanic!");
+        Marker mechanicMarker = mMap.addMarker(mechanicMarkerOptions);
+        mechanicMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
         LatLng tutorPosition = new LatLng(37.4,-122.0);
-        mMap.addMarker(new MarkerOptions().position(tutorPosition).title("I'm a tutor!")).setIcon(
-                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
+        MarkerOptions tutorMarkerOptions = new MarkerOptions();
+        tutorMarkerOptions.position(tutorPosition).title("I'm a tutor!");
+        Marker tutorMarker = mMap.addMarker(tutorMarkerOptions);
+        tutorMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
 
         LatLng driverPosition = new LatLng(37.3688, -122.0363);
-        mMap.addMarker(new MarkerOptions().position(driverPosition).title("I'm a driver!")).setIcon(
-                BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
+        MarkerOptions driverMarkerOptions = new MarkerOptions();
+        driverMarkerOptions.position(driverPosition).title("I'm a driver!");
+        Marker driverMarker = mMap.addMarker(driverMarkerOptions);
+        driverMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
 
         mMap.moveCamera(CameraUpdateFactory.newLatLng(currentPosition));
         mMap.animateCamera(CameraUpdateFactory.zoomTo(12), 2000, null);
+
+        mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
+            @Override
+            public void onInfoWindowClick(Marker marker) {
+                Intent intent1 = new Intent(MapsActivity.this, InstantMessaging.class);
+                String title = marker.getTitle();
+                intent1.putExtra("markertitle", title);
+                startActivity(intent1);
+            }
+        });
     }
 
     @Override
