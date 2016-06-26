@@ -33,6 +33,12 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private Intent skillsIntent;
     private String[] skills;
 
+    private String personToChat;
+    private static final String SHERRY = "SHERRY";
+    private static final String JOCELYN = "JOCELYN";
+    private static final String SUJEETH = "SUJEETH";
+
+    private String smsNumber;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -154,7 +160,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (contains(skills, "babysitting")) {
             LatLng babysitterPosition = new LatLng(37.4149, -122.0486);
             MarkerOptions babysitterMarkerOptions = new MarkerOptions();
-            babysitterMarkerOptions.position(babysitterPosition).title("I'm a babysitter!");
+            babysitterMarkerOptions.position(babysitterPosition).title(SHERRY).snippet("I'm a babysitter!");
             Marker babysitterMarker = mMap.addMarker(babysitterMarkerOptions);
             babysitterMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
         }
@@ -162,13 +168,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (contains(skills, "driving")) {
             LatLng mechanicPosition = new LatLng(37.4220, -122.0841);
             MarkerOptions mechanicMarkerOptions = new MarkerOptions();
-            mechanicMarkerOptions.position(mechanicPosition).title("I'm a driver!");
+            mechanicMarkerOptions.position(mechanicPosition).title(SHERRY).snippet("I'm a driver!");
             Marker mechanicMarker = mMap.addMarker(mechanicMarkerOptions);
             mechanicMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
             LatLng driverPosition = new LatLng(37.3688, -122.0363);
             MarkerOptions driverMarkerOptions = new MarkerOptions();
-            driverMarkerOptions.position(driverPosition).title("I'm a driver!");
+            driverMarkerOptions.position(driverPosition).title(JOCELYN).snippet("I can drive!");
             Marker driverMarker = mMap.addMarker(driverMarkerOptions);
             driverMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
         }
@@ -176,7 +182,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         if (contains(skills, "tutoring")) {
             LatLng tutorPosition = new LatLng(37.4,-122.0);
             MarkerOptions tutorMarkerOptions = new MarkerOptions();
-            tutorMarkerOptions.position(tutorPosition).title("I'm a tutor!");
+            tutorMarkerOptions.position(tutorPosition).title(SUJEETH).snippet("I'm a tutor!");
             Marker tutorMarker = mMap.addMarker(tutorMarkerOptions);
             tutorMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         }
@@ -187,12 +193,31 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Intent intent1 = new Intent(MapsActivity.this, InstantMessaging.class);
-                String title = marker.getTitle();
-                intent1.putExtra("markertitle", title);
-                startActivity(intent1);
+//                Intent intent1 = new Intent(MapsActivity.this, InstantMessaging.class);
+//                String title = marker.getTitle();
+//                intent1.putExtra("markertitle", title);
+//                startActivity(intent1);
+
+                if (marker.getTitle().equals(JOCELYN)) {
+                    smsNumber = "4085073657";
+                } else if (marker.getTitle().equals(SHERRY)){
+                    smsNumber = "4085053664";
+                } else {
+                    smsNumber = "4083290378";
+                }
+
+                onClickWhatsApp();
             }
         });
+    }
+
+    private void onClickWhatsApp() {
+
+        Uri uri = Uri.parse("smsto:" + smsNumber);
+        Intent i = new Intent(Intent.ACTION_SENDTO, uri);
+        i.setPackage("com.whatsapp");
+        startActivity(i);
+
     }
 
     @Override

@@ -34,6 +34,10 @@ public class FindingJobMapsActivity extends FragmentActivity implements OnMapRea
     private Profile profile;
     private String personName;
     private String[] personSkills;
+    private String personToChat;
+    private static final String SHERRY = "SHERRY";
+    private static final String JOCELYN = "JOCELYN";
+    private static final String SUJEETH = "SUJEETH";
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -160,7 +164,7 @@ public class FindingJobMapsActivity extends FragmentActivity implements OnMapRea
         if (contains(personSkills, "babysitting")) {
             LatLng babysitterPosition = new LatLng(37.4149, -122.0486);
             MarkerOptions babysitterMarkerOptions = new MarkerOptions();
-            babysitterMarkerOptions.position(babysitterPosition).title("I need a babysitter!");
+            babysitterMarkerOptions.position(babysitterPosition).title(SHERRY).snippet("I need a babysitter!");
             Marker babysitterMarker = mMap.addMarker(babysitterMarkerOptions);
             babysitterMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_CYAN));
         }
@@ -168,13 +172,13 @@ public class FindingJobMapsActivity extends FragmentActivity implements OnMapRea
         if (contains(personSkills, "driving")) {
             LatLng mechanicPosition = new LatLng(37.4220, -122.0841);
             MarkerOptions mechanicMarkerOptions = new MarkerOptions();
-            mechanicMarkerOptions.position(mechanicPosition).title("I need a ride!");
+            mechanicMarkerOptions.position(mechanicPosition).title(SHERRY).snippet("I need a ride!");
             Marker mechanicMarker = mMap.addMarker(mechanicMarkerOptions);
             mechanicMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_GREEN));
 
             LatLng driverPosition = new LatLng(37.3688, -122.0363);
             MarkerOptions driverMarkerOptions = new MarkerOptions();
-            driverMarkerOptions.position(driverPosition).title("I need a driver!");
+            driverMarkerOptions.position(driverPosition).title(JOCELYN).snippet("I need a driver!");
             Marker driverMarker = mMap.addMarker(driverMarkerOptions);
             driverMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE));
 
@@ -183,7 +187,7 @@ public class FindingJobMapsActivity extends FragmentActivity implements OnMapRea
         if (contains(personSkills, "tutoring")) {
             LatLng tutorPosition = new LatLng(37.4,-122.0);
             MarkerOptions tutorMarkerOptions = new MarkerOptions();
-            tutorMarkerOptions.position(tutorPosition).title("I need a tutor!");
+            tutorMarkerOptions.position(tutorPosition).title(SUJEETH).snippet("I need a tutor!");
             Marker tutorMarker = mMap.addMarker(tutorMarkerOptions);
             tutorMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE));
         }
@@ -191,7 +195,7 @@ public class FindingJobMapsActivity extends FragmentActivity implements OnMapRea
         if (contains(personSkills, "lifting")) {
             LatLng tutorPosition = new LatLng(37.401,-122.02);
             MarkerOptions tutorMarkerOptions = new MarkerOptions();
-            tutorMarkerOptions.position(tutorPosition).title("I need help moving!");
+            tutorMarkerOptions.position(tutorPosition).title(SUJEETH).snippet("I need help moving!");
             Marker tutorMarker = mMap.addMarker(tutorMarkerOptions);
             tutorMarker.setIcon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
         }
@@ -202,10 +206,19 @@ public class FindingJobMapsActivity extends FragmentActivity implements OnMapRea
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(Marker marker) {
-                Intent intent1 = new Intent(FindingJobMapsActivity.this, InstantMessaging.class);
-                String title = marker.getTitle();
-                intent1.putExtra("markertitle", title);
-                startActivity(intent1);
+//                Intent intent1 = new Intent(FindingJobMapsActivity.this, InstantMessaging.class);
+//                String title = marker.getTitle();
+//                intent1.putExtra("markertitle", title);
+//                startActivity(intent1);
+                if (marker.getTitle().equals(JOCELYN)) {
+                    personToChat = "jocelyn.tran.12";
+                } else if (marker.getTitle().equals(SHERRY)){
+                    personToChat = "100008352789236";
+                } else {
+                    personToChat = "sujeeth.jinesh";
+                }
+
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://messaging/"+personToChat)));
             }
         });
     }
