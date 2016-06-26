@@ -27,6 +27,8 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.concurrent.TimeUnit;
+
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
@@ -38,7 +40,8 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
     private static final String JOCELYN = "JOCELYN";
     private static final String SUJEETH = "SUJEETH";
 
-    private String smsNumber;
+    private String invoice;
+
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -124,13 +127,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
             };
 
-            if (location != null) {
-                drawMarker(location);
-            } else {
-                drawDefaultMarker();
-            }
-
-            //locationManager.requestLocationUpdates(provider,20000,0, (android.location.LocationListener) locationListener);
+            drawDefaultMarker();
         }
     }
 
@@ -155,7 +152,6 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         LatLng currentPosition = new LatLng(37.4102940,-122.0364610);
         Marker currentPositionMarker = mMap.addMarker(new MarkerOptions().position(currentPosition));
         currentPositionMarker.setVisible(true);
-        currentPositionMarker.setVisible(false);
 
         if (contains(skills, "babysitting")) {
             LatLng babysitterPosition = new LatLng(37.4149, -122.0486);
@@ -207,6 +203,24 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
                 }
 
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://messaging/"+personToChat)));
+
+                try {
+                    TimeUnit.SECONDS.sleep(4);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                Intent intent = new Intent(Intent.ACTION_SENDTO);
+                intent.setData(Uri.parse("mailto:"));
+
+                invoice = "Order Summary:\n\tLabor: $15\n\tTotal: $20";
+
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"jocelyn.tran1@gmail.com"});
+                intent.putExtra(Intent.EXTRA_TEXT, invoice);
+
+                if(intent.resolveActivity(getPackageManager()) != null) {
+                    startActivityForResult(intent, 0);
+                }
             }
         });
     }
