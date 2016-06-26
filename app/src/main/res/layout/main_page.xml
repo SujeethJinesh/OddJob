@@ -17,6 +17,13 @@
 
     </View>
 
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@mipmap/hill_background"
+        android:scaleX="2"
+        />
+
     <Button
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
