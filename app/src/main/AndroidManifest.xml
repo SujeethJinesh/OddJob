@@ -61,7 +61,6 @@
 
         <activity android:name=".ProfileMaker"/>
         <activity android:name=".RequestJob"/>
-        <activity android:name=".InstantMessaging"/>
 
     </application>
 

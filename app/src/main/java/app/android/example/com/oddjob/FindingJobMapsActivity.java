@@ -211,11 +211,11 @@ public class FindingJobMapsActivity extends FragmentActivity implements OnMapRea
 //                intent1.putExtra("markertitle", title);
 //                startActivity(intent1);
                 if (marker.getTitle().equals(JOCELYN)) {
-                    personToChat = "jocelyn.tran.12";
+                    personToChat = "1445664847";
                 } else if (marker.getTitle().equals(SHERRY)){
                     personToChat = "100008352789236";
                 } else {
-                    personToChat = "sujeeth.jinesh";
+                    personToChat = "100001898881820";
                 }
 
                 startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://messaging/"+personToChat)));

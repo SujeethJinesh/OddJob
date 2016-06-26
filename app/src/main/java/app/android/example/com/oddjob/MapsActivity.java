@@ -199,25 +199,16 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 //                startActivity(intent1);
 
                 if (marker.getTitle().equals(JOCELYN)) {
-                    smsNumber = "4085073657";
+                    personToChat = "1445664847";
                 } else if (marker.getTitle().equals(SHERRY)){
-                    smsNumber = "4085053664";
+                    personToChat = "100008352789236";
                 } else {
-                    smsNumber = "4083290378";
+                    personToChat = "100001898881820";
                 }
 
-                onClickWhatsApp();
+                startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("fb://messaging/"+personToChat)));
             }
         });
-    }
-
-    private void onClickWhatsApp() {
-
-        Uri uri = Uri.parse("smsto:" + smsNumber);
-        Intent i = new Intent(Intent.ACTION_SENDTO, uri);
-        i.setPackage("com.whatsapp");
-        startActivity(i);
-
     }
 
     @Override
